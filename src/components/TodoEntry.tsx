@@ -21,6 +21,7 @@ const TodoEntry: React.FunctionComponent<TodoEntryProps> = (props) => {
   return (
     <li>
       <input
+        data-testid="todo-checkbox"
         type="checkbox"
         checked={props.completed}
         onChange={onCheckboxClick}

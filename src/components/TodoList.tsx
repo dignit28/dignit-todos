@@ -5,12 +5,16 @@ import TodoEntry from "./TodoEntry";
 import TodoForm from "./TodoForm";
 // Types
 import { TodoEntryInterface } from "../utility/interfaces";
-// Data
-import { defaultTodoEntries } from "../defaults/defaultData";
 
-const TodoList = () => {
-  const [todoEntries, setTodoEntries] =
-    React.useState<TodoEntryInterface[]>(defaultTodoEntries);
+interface TodoListProps {
+  defaultTodoEntries: TodoEntryInterface[];
+}
+
+const TodoList: React.FunctionComponent<TodoListProps> = (props) => {
+  const [todoEntries, setTodoEntries] = React.useState<TodoEntryInterface[]>(
+    props.defaultTodoEntries
+  );
+
   const todoEntriesElements = todoEntries.map((todoEntry, index) => {
     return (
       <TodoEntry
