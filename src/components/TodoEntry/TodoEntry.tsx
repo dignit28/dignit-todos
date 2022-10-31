@@ -1,7 +1,7 @@
+import React from "react";
 // Styles
 import "./TodoEntry.css";
 // Types
-import React from "react";
 import { TodoEntryInterface } from "../../utility/interfaces";
 
 interface TodoEntryProps {
@@ -12,6 +12,7 @@ interface TodoEntryProps {
 }
 
 const TodoEntry: React.FunctionComponent<TodoEntryProps> = (props) => {
+  // Handles controlled input
   const onCheckboxClick = (event: React.ChangeEvent<HTMLInputElement>) => {
     props.setTodoEntries((prevTodoEntries) => {
       const updatedTodoEntries: TodoEntryInterface[] = [...prevTodoEntries];
@@ -21,14 +22,17 @@ const TodoEntry: React.FunctionComponent<TodoEntryProps> = (props) => {
   };
 
   return (
-    <li>
+    <li data-testid="todo-entry">
       <input
         data-testid="todo-checkbox"
         type="checkbox"
         checked={props.completed}
         onChange={onCheckboxClick}
       ></input>
-      <p className={"todo-entry__text" + (props.completed ? "_checked" : "")}>
+      <p
+        data-testid="todo-text"
+        className={"todo-entry__text" + (props.completed ? "_checked" : "")}
+      >
         {props.content}
       </p>
     </li>

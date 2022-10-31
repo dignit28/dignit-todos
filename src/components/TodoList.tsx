@@ -15,6 +15,7 @@ const TodoList: React.FunctionComponent<TodoListProps> = (props) => {
     props.defaultTodoEntries
   );
 
+  // Create list of todo entries from state
   const todoEntriesElements = todoEntries.map((todoEntry, index) => {
     return (
       <TodoEntry
@@ -29,7 +30,7 @@ const TodoList: React.FunctionComponent<TodoListProps> = (props) => {
 
   return (
     <main>
-      <TodoForm />
+      <TodoForm setTodoEntries={setTodoEntries} />
       <ul>{todoEntriesElements}</ul>
     </main>
   );

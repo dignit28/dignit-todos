@@ -1,17 +1,29 @@
 import React from "react";
+// Types
+import { TodoEntryInterface } from "../utility/interfaces";
+interface TodoFormProps {
+  setTodoEntries: React.Dispatch<React.SetStateAction<TodoEntryInterface[]>>;
+}
 
-const TodoForm = () => {
+const TodoForm: React.FunctionComponent<TodoFormProps> = (props) => {
   const [inputData, setInputData] = React.useState("");
 
+  // Handles controlled input
   const handleInputChange = (
     event: React.ChangeEvent<HTMLInputElement>
   ): void => {
     setInputData(event.target.value);
   };
 
+  // Adds new entry to list
   const handleButtonClick = (event: React.SyntheticEvent): void => {
     event.preventDefault();
-    console.log(inputData);
+    props.setTodoEntries((prevTodoEntries) => {
+      return [...prevTodoEntries].concat([
+        { completed: false, content: inputData },
+      ]);
+    });
+    setInputData("");
   };
 
   return (
@@ -21,7 +33,12 @@ const TodoForm = () => {
         onChange={handleInputChange}
         value={inputData}
       ></input>
-      <button>+</button>
+      <button
+        data-testid="form-button"
+        disabled={inputData === "" ? true : false}
+      >
+        +
+      </button>
     </form>
   );
 };
