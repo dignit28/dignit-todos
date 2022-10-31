@@ -151,6 +151,39 @@ describe("TodoList component", () => {
     fireEvent.blur(getByTestId("todo-editor"));
     expect(getByTestId("todo-text")).toHaveTextContent(/^testing$/);
   });
+
+  it("should delete correct item from list", () => {
+    const { getAllByTestId, getByTestId } = render(
+      <TodoList
+        defaultTodoEntries={[
+          { completed: true, content: "testStart" },
+          { completed: false, content: "testMiddle1" },
+          { completed: false, content: "testMiddle2" },
+          { completed: false, content: "testMiddle3" },
+          { completed: true, content: "testEnd" },
+        ]}
+      />
+    );
+    // Delete from middle
+    let deleteButtons = getAllByTestId("todo-delete");
+    let todoList = getByTestId("todo-list");
+    fireEvent.click(deleteButtons[2]);
+    expect(todoList).not.toHaveTextContent("testMiddle2");
+    // Delete from start
+    deleteButtons = getAllByTestId("todo-delete");
+    todoList = getByTestId("todo-list");
+    fireEvent.click(deleteButtons[0]);
+    expect(todoList).not.toHaveTextContent("testStart");
+    // Delete from end
+    deleteButtons = getAllByTestId("todo-delete");
+    todoList = getByTestId("todo-list");
+    fireEvent.click(deleteButtons[2]);
+    expect(todoList).not.toHaveTextContent("testEnd");
+    // Final
+    expect(todoList.children).toHaveLength(2);
+    expect(todoList).toHaveTextContent("testMiddle1");
+    expect(todoList).toHaveTextContent("testMiddle3");
+  });
 });
 
 describe("TodoForm component", () => {

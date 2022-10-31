@@ -31,7 +31,7 @@ const TodoList: React.FunctionComponent<TodoListProps> = (props) => {
   return (
     <main>
       <TodoForm setTodoEntries={setTodoEntries} />
-      <ul>{todoEntriesElements}</ul>
+      <ul data-testid="todo-list">{todoEntriesElements}</ul>
     </main>
   );
 };

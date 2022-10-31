@@ -54,7 +54,11 @@ const TodoEntry: React.FunctionComponent<TodoEntryProps> = (props) => {
   };
 
   const deleteEntry = () => {
-    console.log("Delete " + props.index);
+    props.setTodoEntries((prevTodoEntries) => {
+      const updatedTodoEntries: TodoEntryInterface[] = [...prevTodoEntries];
+      updatedTodoEntries.splice(props.index, 1);
+      return updatedTodoEntries;
+    });
   };
 
   return (
@@ -86,7 +90,9 @@ const TodoEntry: React.FunctionComponent<TodoEntryProps> = (props) => {
       <button data-testid="todo-edit" onClick={editEntry}>
         E
       </button>
-      <button onClick={deleteEntry}>D</button>
+      <button data-testid="todo-delete" onClick={deleteEntry}>
+        D
+      </button>
     </li>
   );
 };
