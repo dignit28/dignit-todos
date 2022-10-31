@@ -21,6 +21,14 @@ const TodoEntry: React.FunctionComponent<TodoEntryProps> = (props) => {
     });
   };
 
+  const editEntry = () => {
+    console.log("Edit " + props.index);
+  };
+
+  const deleteEntry = () => {
+    console.log("Delete " + props.index);
+  };
+
   return (
     <li data-testid="todo-entry">
       <input
@@ -35,6 +43,8 @@ const TodoEntry: React.FunctionComponent<TodoEntryProps> = (props) => {
       >
         {props.content}
       </p>
+      <button onClick={editEntry}>E</button>
+      <button onClick={deleteEntry}>D</button>
     </li>
   );
 };
