@@ -12,6 +12,9 @@ interface TodoEntryProps {
 }
 
 const TodoEntry: React.FunctionComponent<TodoEntryProps> = (props) => {
+  const [editIsActive, setEditIsActive] = React.useState(false);
+  const [editorText, setEditorText] = React.useState("");
+
   // Handles controlled input
   const onCheckboxClick = (event: React.ChangeEvent<HTMLInputElement>) => {
     props.setTodoEntries((prevTodoEntries) => {
@@ -21,8 +24,33 @@ const TodoEntry: React.FunctionComponent<TodoEntryProps> = (props) => {
     });
   };
 
+  const handleEditorChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setEditorText(event.target.value);
+  };
+
+  const handleEditorKeyPress = (event: React.KeyboardEvent) => {
+    switch (event.key) {
+      case "Esc":
+      case "Escape":
+      case "Enter":
+        completeEdit();
+        break;
+    }
+  };
+
   const editEntry = () => {
-    console.log("Edit " + props.index);
+    setEditorText(props.content);
+    setEditIsActive(true);
+  };
+
+  const completeEdit = () => {
+    setEditIsActive(false);
+    props.setTodoEntries((prevTodoEntries) => {
+      const updatedTodoEntries: TodoEntryInterface[] = [...prevTodoEntries];
+      updatedTodoEntries[props.index].content = editorText;
+      return updatedTodoEntries;
+    });
+    setEditorText("");
   };
 
   const deleteEntry = () => {
@@ -37,13 +65,27 @@ const TodoEntry: React.FunctionComponent<TodoEntryProps> = (props) => {
         checked={props.completed}
         onChange={onCheckboxClick}
       ></input>
-      <p
-        data-testid="todo-text"
-        className={"todo-entry__text" + (props.completed ? "_checked" : "")}
-      >
-        {props.content}
-      </p>
-      <button onClick={editEntry}>E</button>
+      {editIsActive ? (
+        <input
+          autoFocus
+          data-testid="todo-editor"
+          value={editorText}
+          className="todo-edit"
+          onChange={handleEditorChange}
+          onKeyDown={handleEditorKeyPress}
+          onBlur={completeEdit}
+        ></input>
+      ) : (
+        <p
+          data-testid="todo-text"
+          className={"todo-entry__text" + (props.completed ? "_checked" : "")}
+        >
+          {props.content}
+        </p>
+      )}
+      <button data-testid="todo-edit" onClick={editEntry}>
+        E
+      </button>
       <button onClick={deleteEntry}>D</button>
     </li>
   );

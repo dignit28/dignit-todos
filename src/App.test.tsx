@@ -24,6 +24,74 @@ describe("TodoEntry component", () => {
     fireEvent.click(getByTestId("todo-checkbox"));
     expect(setTodoEntries).toHaveBeenCalledTimes(1);
   });
+
+  it("should open and focus editor on edit button click", () => {
+    const setTodoEntries = jest.fn();
+    const { queryByTestId, getByTestId } = render(
+      <TodoEntry
+        content={"test"}
+        completed={false}
+        index={0}
+        setTodoEntries={setTodoEntries}
+      />
+    );
+
+    fireEvent.click(getByTestId("todo-edit"));
+    expect(queryByTestId("todo-text")).toBeNull();
+    expect(getByTestId("todo-editor")).toBeTruthy();
+    expect(getByTestId("todo-editor")).toHaveFocus();
+  });
+});
+
+it("should close editor on Enter press", () => {
+  const setTodoEntries = jest.fn();
+  const { queryByTestId, getByTestId } = render(
+    <TodoEntry
+      content={"test"}
+      completed={false}
+      index={0}
+      setTodoEntries={setTodoEntries}
+    />
+  );
+
+  fireEvent.click(getByTestId("todo-edit"));
+  fireEvent.keyDown(getByTestId("todo-editor"), { key: "Enter" });
+  expect(queryByTestId("todo-editor")).toBeNull();
+  expect(getByTestId("todo-text")).toBeTruthy();
+});
+
+it("should close editor on Escape press", () => {
+  const setTodoEntries = jest.fn();
+  const { queryByTestId, getByTestId } = render(
+    <TodoEntry
+      content={"test"}
+      completed={false}
+      index={0}
+      setTodoEntries={setTodoEntries}
+    />
+  );
+
+  fireEvent.click(getByTestId("todo-edit"));
+  fireEvent.keyDown(getByTestId("todo-editor"), { key: "Escape" });
+  expect(queryByTestId("todo-editor")).toBeNull();
+  expect(getByTestId("todo-text")).toBeTruthy();
+});
+
+it("should close editor on blur", () => {
+  const setTodoEntries = jest.fn();
+  const { queryByTestId, getByTestId } = render(
+    <TodoEntry
+      content={"test"}
+      completed={false}
+      index={0}
+      setTodoEntries={setTodoEntries}
+    />
+  );
+
+  fireEvent.click(getByTestId("todo-edit"));
+  fireEvent.blur(getByTestId("todo-editor"));
+  expect(queryByTestId("todo-editor")).toBeNull();
+  expect(getByTestId("todo-text")).toBeTruthy();
 });
 
 describe("TodoList component", () => {
@@ -71,6 +139,17 @@ describe("TodoList component", () => {
     fireEvent.click(buttonElement);
     expect(getByTestId("todo-entry")).toBeTruthy();
     expect(getByTestId("todo-text")).toHaveTextContent(/^Hello$/);
+  });
+
+  it("should change text on edit properly", () => {
+    const { getByTestId } = render(
+      <TodoList defaultTodoEntries={[{ completed: true, content: "test" }]} />
+    );
+
+    fireEvent.click(getByTestId("todo-edit"));
+    userEvent.type(getByTestId("todo-editor"), "ing");
+    fireEvent.blur(getByTestId("todo-editor"));
+    expect(getByTestId("todo-text")).toHaveTextContent(/^testing$/);
   });
 });
 
