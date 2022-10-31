@@ -16,7 +16,11 @@ const TodoForm = () => {
 
   return (
     <form onSubmit={handleButtonClick}>
-      <input onChange={handleInputChange} value={inputData}></input>
+      <input
+        data-testid="form-input"
+        onChange={handleInputChange}
+        value={inputData}
+      ></input>
       <button>+</button>
     </form>
   );

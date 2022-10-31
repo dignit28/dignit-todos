@@ -2,6 +2,8 @@ import React from "react";
 import { render, cleanup, screen, fireEvent } from "@testing-library/react";
 import TodoList from "./components/TodoList";
 import TodoEntry from "./components/TodoEntry/TodoEntry";
+import TodoForm from "./components/TodoForm";
+import userEvent from "@testing-library/user-event";
 
 afterEach(cleanup);
 
@@ -55,5 +57,19 @@ describe("TodoList component", () => {
       "todo-entry__text_checked"
     );
     expect(getByText(/test2/i).getAttribute("class")).toBe("todo-entry__text");
+  });
+});
+
+describe("TodoForm component", () => {
+  it("should properly change input", () => {
+    const { getByTestId } = render(<TodoForm />);
+
+    const inputElement = getByTestId("form-input");
+
+    userEvent.type(inputElement, "Hello");
+    expect(inputElement.getAttribute("value")).toBe("Hello");
+    
+    userEvent.type(inputElement, " man");
+    expect(inputElement.getAttribute("value")).toBe("Hello man");
   });
 });
