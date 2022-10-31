@@ -1,4 +1,5 @@
 import React from "react";
+import { v4 as uuidv4 } from "uuid";
 // Components
 import TodoEntry from "./TodoEntry";
 import TodoForm from "./TodoForm";
@@ -12,13 +13,13 @@ const TodoList = () => {
     React.useState<TodoEntryInterface[]>(defaultTodoEntries);
 
   const todoEntriesElements = todoEntries.map((todoEntry) => {
-    return <TodoEntry />;
+    return <TodoEntry key={uuidv4()} />;
   });
 
   return (
     <main>
       <TodoForm />
-      {todoEntriesElements}
+      <ul>{todoEntriesElements}</ul>
     </main>
   );
 };
