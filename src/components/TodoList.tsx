@@ -1,7 +1,7 @@
 import React from "react";
 import { v4 as uuidv4 } from "uuid";
 // Components
-import TodoEntry from "./TodoEntry";
+import TodoEntry from "./TodoEntry/TodoEntry";
 import TodoForm from "./TodoForm";
 // Types
 import { TodoEntryInterface } from "../utility/interfaces";

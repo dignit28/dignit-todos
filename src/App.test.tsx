@@ -1,7 +1,7 @@
 import React from "react";
 import { render, cleanup, screen, fireEvent } from "@testing-library/react";
 import TodoList from "./components/TodoList";
-import TodoEntry from "./components/TodoEntry";
+import TodoEntry from "./components/TodoEntry/TodoEntry";
 
 afterEach(cleanup);
 
@@ -39,5 +39,21 @@ describe("TodoList component", () => {
       fireEvent.click(element);
       expect(element.checked).toBe(checkedInitial);
     });
+  });
+
+  it("should set class name of text based on checkbox value", () => {
+    const { getByText } = render(
+      <TodoList
+        defaultTodoEntries={[
+          { completed: true, content: "test1" },
+          { completed: false, content: "test2" },
+        ]}
+      />
+    );
+
+    expect(getByText(/test1/i).getAttribute("class")).toBe(
+      "todo-entry__text_checked"
+    );
+    expect(getByText(/test2/i).getAttribute("class")).toBe("todo-entry__text");
   });
 });

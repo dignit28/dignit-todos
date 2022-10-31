@@ -1,6 +1,8 @@
+// Styles
+import "./TodoEntry.css";
 // Types
 import React from "react";
-import { TodoEntryInterface } from "../utility/interfaces";
+import { TodoEntryInterface } from "../../utility/interfaces";
 
 interface TodoEntryProps {
   content: string;
@@ -26,7 +28,9 @@ const TodoEntry: React.FunctionComponent<TodoEntryProps> = (props) => {
         checked={props.completed}
         onChange={onCheckboxClick}
       ></input>
-      <p>{props.content}</p>
+      <p className={"todo-entry__text" + (props.completed ? "_checked" : "")}>
+        {props.content}
+      </p>
     </li>
   );
 };
