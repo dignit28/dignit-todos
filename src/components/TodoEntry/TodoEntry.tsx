@@ -24,10 +24,12 @@ const TodoEntry: React.FunctionComponent<TodoEntryProps> = (props) => {
     });
   };
 
+  // Handles controlled input
   const handleEditorChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setEditorText(event.target.value);
   };
 
+  // Calls completeEdit() on specific key press
   const handleEditorKeyPress = (event: React.KeyboardEvent) => {
     switch (event.key) {
       case "Esc":
@@ -38,11 +40,13 @@ const TodoEntry: React.FunctionComponent<TodoEntryProps> = (props) => {
     }
   };
 
+  // Opens entry editor
   const editEntry = () => {
     setEditorText(props.content);
     setEditIsActive(true);
   };
 
+  // Closes editor and updates entry
   const completeEdit = () => {
     setEditIsActive(false);
     props.setTodoEntries((prevTodoEntries) => {
@@ -53,6 +57,7 @@ const TodoEntry: React.FunctionComponent<TodoEntryProps> = (props) => {
     setEditorText("");
   };
 
+  // Deletes entry
   const deleteEntry = () => {
     props.setTodoEntries((prevTodoEntries) => {
       const updatedTodoEntries: TodoEntryInterface[] = [...prevTodoEntries];

@@ -5,7 +5,6 @@ import TodoList from "./components/TodoList";
 import TodoEntry from "./components/TodoEntry/TodoEntry";
 import TodoForm from "./components/TodoForm";
 import userEvent from "@testing-library/user-event";
-import { click } from "@testing-library/user-event/dist/click";
 
 afterEach(cleanup);
 
