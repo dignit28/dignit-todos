@@ -11,9 +11,14 @@ import { defaultTodoEntries } from "../defaults/defaultData";
 const TodoList = () => {
   const [todoEntries, setTodoEntries] =
     React.useState<TodoEntryInterface[]>(defaultTodoEntries);
-
   const todoEntriesElements = todoEntries.map((todoEntry) => {
-    return <TodoEntry key={uuidv4()} />;
+    return (
+      <TodoEntry
+        key={uuidv4()}
+        content={todoEntry.content}
+        completed={todoEntry.completed}
+      />
+    );
   });
 
   return (
