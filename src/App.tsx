@@ -7,10 +7,8 @@ import InspirationalQuote from "./components/InspirationalQuote/InspirationalQuo
 
 function App() {
   return (
-    <div>
-      <div className="App">
-        <TodoList test={false} defaultTodoEntries={[]} />
-      </div>
+    <div className="App">
+      <TodoList test={false} defaultTodoEntries={[]} />
       <InspirationalQuote />
     </div>
   );

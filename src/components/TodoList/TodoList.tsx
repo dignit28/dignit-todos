@@ -79,7 +79,7 @@ const TodoList: React.FunctionComponent<TodoListProps> = (props) => {
         key={uuidv4()}
         data-testid={"view-mode-button-" + data.value}
         className={
-          "todo-list__view-button" + (viewMode === data.mode ? "_active" : "")
+          "todos__view-button" + (viewMode === data.mode ? "_active" : "")
         }
         disabled={viewMode === data.mode}
         onClick={() => switchViewMode(data.mode)}
@@ -108,14 +108,14 @@ const TodoList: React.FunctionComponent<TodoListProps> = (props) => {
   };
 
   return (
-    <main>
+    <main className="todos">
       <TodoForm setTodoEntries={setTodoEntries} />
-      <ul data-testid="todo-list">{todoEntriesElements}</ul>
-      <span data-testid="active-amount-text">
+      <ul className="todos__list" data-testid="todo-list">{todoEntriesElements}</ul>
+      <span className="todos__items-left" data-testid="active-amount-text">
         {activeTodosAmount} items left
       </span>
-      {buttonElements}
-      <button data-testid="clear-completed-button" onClick={clearCompleted}>
+      <div className="todos__view-button-container" >{buttonElements}</div>
+      <button className="clear-button" data-testid="clear-completed-button" onClick={clearCompleted}>
         Clear completed
       </button>
     </main>

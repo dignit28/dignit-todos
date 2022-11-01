@@ -26,18 +26,18 @@ const InspirationalQuote: React.FunctionComponent = () => {
   };
 
   return (
-    <div>
+    <div className="quote-container">
       <div>
         {loading ? (
           <p>Loading quote...</p>
         ) : (
-          <>
-            <p>-{quoteData.content}</p>
-            <p>{quoteData.author}</p>
-          </>
+          <div className="quote-container__quote">
+            <p className="quote-container__quote-content">-{quoteData.content}</p>
+            <p className="quote-container__quote-author">{quoteData.author}</p>
+          </div>
         )}
       </div>
-      <button onClick={generateQuote}>New quote</button>
+      <button className="quote-container__new-button" onClick={generateQuote}>New quote</button>
     </div>
   );
 };

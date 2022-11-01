@@ -127,9 +127,9 @@ describe("TodoList component", () => {
     );
 
     expect(getByText(/test1/i).getAttribute("class")).toBe(
-      "todo-entry__text_checked"
+      "todos__todo-text_checked"
     );
-    expect(getByText(/test2/i).getAttribute("class")).toBe("todo-entry__text");
+    expect(getByText(/test2/i).getAttribute("class")).toBe("todos__todo-text");
   });
 
   it("should add new entry with proper value on button click", () => {

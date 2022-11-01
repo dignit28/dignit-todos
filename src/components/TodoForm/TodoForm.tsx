@@ -29,13 +29,15 @@ const TodoForm: React.FunctionComponent<TodoFormProps> = (props) => {
   };
 
   return (
-    <form onSubmit={handleButtonClick}>
+    <form className="todos__form" onSubmit={handleButtonClick}>
       <input
+        className="todos__input"
         data-testid="form-input"
         onChange={handleInputChange}
         value={inputData}
       ></input>
       <button
+        className="todos__new-button"
         data-testid="form-button"
         disabled={inputData === "" ? true : false}
       >

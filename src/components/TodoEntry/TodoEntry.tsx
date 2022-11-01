@@ -67,8 +67,9 @@ const TodoEntry: React.FunctionComponent<TodoEntryProps> = (props) => {
   };
 
   return (
-    <li data-testid="todo-entry">
+    <li className="todos__list-item" data-testid="todo-entry">
       <input
+        className="todos__checkbox"
         data-testid="todo-checkbox"
         type="checkbox"
         checked={props.completed}
@@ -79,7 +80,7 @@ const TodoEntry: React.FunctionComponent<TodoEntryProps> = (props) => {
           autoFocus
           data-testid="todo-editor"
           value={editorText}
-          className="todo-edit"
+          className="todos__editor"
           onChange={handleEditorChange}
           onKeyDown={handleEditorKeyPress}
           onBlur={completeEdit}
@@ -87,15 +88,15 @@ const TodoEntry: React.FunctionComponent<TodoEntryProps> = (props) => {
       ) : (
         <p
           data-testid="todo-text"
-          className={"todo-entry__text" + (props.completed ? "_checked" : "")}
+          className={"todos__todo-text" + (props.completed ? "_checked" : "")}
         >
           {props.content}
         </p>
       )}
-      <button data-testid="todo-edit" onClick={editEntry}>
+      <button className="todos__edit-button" data-testid="todo-edit" onClick={editEntry}>
         E
       </button>
-      <button data-testid="todo-delete" onClick={deleteEntry}>
+      <button className="todos__delete-button" data-testid="todo-delete" onClick={deleteEntry}>
         D
       </button>
     </li>
