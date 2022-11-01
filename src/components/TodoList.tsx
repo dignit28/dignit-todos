@@ -18,8 +18,14 @@ interface ButtonData {
 
 const TodoList: React.FunctionComponent<TodoListProps> = (props) => {
   const [todoEntries, setTodoEntries] = React.useState<TodoEntryInterface[]>(
-    props.defaultTodoEntries
+    JSON.parse(localStorage.getItem("dignitTodoSaveData")!) ||
+      props.defaultTodoEntries
   );
+
+  React.useEffect(() => {
+    console.log("hello");
+    localStorage.setItem("dignitTodoSaveData", JSON.stringify(todoEntries));
+  }, [todoEntries]);
 
   const [viewMode, setViewMode] = React.useState<ViewMode>(ViewMode.ALL);
 
