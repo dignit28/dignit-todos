@@ -183,6 +183,15 @@ describe("TodoList component", () => {
     expect(todoList).toHaveTextContent("testMiddle1");
     expect(todoList).toHaveTextContent("testMiddle3");
   });
+
+  it("should update uncompleted items amount", () => {
+    const { getByTestId } = render(
+      <TodoList defaultTodoEntries={[{ completed: false, content: "test" }]} />
+    );
+    expect(getByTestId("active-amount-text")).toHaveTextContent("1");
+    fireEvent.click(getByTestId("todo-checkbox"));
+    expect(getByTestId("active-amount-text")).toHaveTextContent("0");
+  });
 });
 
 describe("TodoForm component", () => {
