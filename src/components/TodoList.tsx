@@ -8,6 +8,7 @@ import { TodoEntryInterface } from "../utility/interfaces";
 import { ViewMode } from "../utility/enums";
 
 interface TodoListProps {
+  test: boolean;
   defaultTodoEntries: TodoEntryInterface[];
 }
 
@@ -18,7 +19,7 @@ interface ButtonData {
 
 const TodoList: React.FunctionComponent<TodoListProps> = (props) => {
   const [todoEntries, setTodoEntries] = React.useState<TodoEntryInterface[]>(
-    JSON.parse(localStorage.getItem("dignitTodoSaveData")!) ||
+    (!props.test && JSON.parse(localStorage.getItem("dignitTodoSaveData")!)) ||
       props.defaultTodoEntries
   );
 
@@ -74,7 +75,7 @@ const TodoList: React.FunctionComponent<TodoListProps> = (props) => {
   const buttonElements = buttonData.map((data) => {
     return (
       <button
-        data-buttonValue={data.value}
+        key={uuidv4()}
         data-testid={"view-mode-button-" + data.value}
         className={
           "todo-list__view-button" + (viewMode === data.mode ? "_active" : "")

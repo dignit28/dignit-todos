@@ -96,7 +96,10 @@ describe("TodoEntry component", () => {
 describe("TodoList component", () => {
   it("should update checkbox value on click", () => {
     const { getAllByTestId } = render(
-      <TodoList defaultTodoEntries={[{ completed: true, content: "test" }]} />
+      <TodoList
+        test={true}
+        defaultTodoEntries={[{ completed: true, content: "test" }]}
+      />
     );
 
     const todoCheckboxes = getAllByTestId(
@@ -115,6 +118,7 @@ describe("TodoList component", () => {
   it("should set class name of text based on checkbox value", () => {
     const { getByText } = render(
       <TodoList
+        test={true}
         defaultTodoEntries={[
           { completed: true, content: "test1" },
           { completed: false, content: "test2" },
@@ -129,7 +133,9 @@ describe("TodoList component", () => {
   });
 
   it("should add new entry with proper value on button click", () => {
-    const { getByTestId } = render(<TodoList defaultTodoEntries={[]} />);
+    const { getByTestId } = render(
+      <TodoList test={true} defaultTodoEntries={[]} />
+    );
 
     const inputElement = getByTestId("form-input") as HTMLInputElement;
     const buttonElement = getByTestId("form-button");
@@ -142,7 +148,10 @@ describe("TodoList component", () => {
 
   it("should change text on edit properly", () => {
     const { getByTestId } = render(
-      <TodoList defaultTodoEntries={[{ completed: true, content: "test" }]} />
+      <TodoList
+        test={true}
+        defaultTodoEntries={[{ completed: true, content: "test" }]}
+      />
     );
 
     fireEvent.click(getByTestId("todo-edit"));
@@ -154,6 +163,7 @@ describe("TodoList component", () => {
   it("should delete correct item from list", () => {
     const { getAllByTestId, getByTestId } = render(
       <TodoList
+        test={true}
         defaultTodoEntries={[
           { completed: true, content: "testStart" },
           { completed: false, content: "testMiddle1" },
@@ -186,7 +196,10 @@ describe("TodoList component", () => {
 
   it("should update uncompleted items amount", () => {
     const { getByTestId } = render(
-      <TodoList defaultTodoEntries={[{ completed: false, content: "test" }]} />
+      <TodoList
+        test={true}
+        defaultTodoEntries={[{ completed: false, content: "test" }]}
+      />
     );
     expect(getByTestId("active-amount-text")).toHaveTextContent("1");
     fireEvent.click(getByTestId("todo-checkbox"));
@@ -196,6 +209,7 @@ describe("TodoList component", () => {
   it("should update view on view mode change", () => {
     const { getByTestId } = render(
       <TodoList
+        test={true}
         defaultTodoEntries={[
           { completed: false, content: "test1" },
           { completed: true, content: "test2" },
@@ -223,6 +237,7 @@ describe("TodoList component", () => {
   it("should clear all completed entries on 'clear completed' button click", () => {
     const { getByTestId } = render(
       <TodoList
+      test={true}
         defaultTodoEntries={[
           { completed: true, content: "test1" },
           { completed: false, content: "test2" },
