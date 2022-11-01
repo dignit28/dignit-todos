@@ -40,57 +40,57 @@ describe("TodoEntry component", () => {
     expect(getByTestId("todo-editor")).toBeTruthy();
     expect(getByTestId("todo-editor")).toHaveFocus();
   });
-});
 
-it("should close editor on Enter press", () => {
-  const setTodoEntries = jest.fn();
-  const { queryByTestId, getByTestId } = render(
-    <TodoEntry
-      content={"test"}
-      completed={false}
-      index={0}
-      setTodoEntries={setTodoEntries}
-    />
-  );
+  it("should close editor on Enter press", () => {
+    const setTodoEntries = jest.fn();
+    const { queryByTestId, getByTestId } = render(
+      <TodoEntry
+        content={"test"}
+        completed={false}
+        index={0}
+        setTodoEntries={setTodoEntries}
+      />
+    );
 
-  fireEvent.click(getByTestId("todo-edit"));
-  fireEvent.keyDown(getByTestId("todo-editor"), { key: "Enter" });
-  expect(queryByTestId("todo-editor")).toBeNull();
-  expect(getByTestId("todo-text")).toBeTruthy();
-});
+    fireEvent.click(getByTestId("todo-edit"));
+    fireEvent.keyDown(getByTestId("todo-editor"), { key: "Enter" });
+    expect(queryByTestId("todo-editor")).toBeNull();
+    expect(getByTestId("todo-text")).toBeTruthy();
+  });
 
-it("should close editor on Escape press", () => {
-  const setTodoEntries = jest.fn();
-  const { queryByTestId, getByTestId } = render(
-    <TodoEntry
-      content={"test"}
-      completed={false}
-      index={0}
-      setTodoEntries={setTodoEntries}
-    />
-  );
+  it("should close editor on Escape press", () => {
+    const setTodoEntries = jest.fn();
+    const { queryByTestId, getByTestId } = render(
+      <TodoEntry
+        content={"test"}
+        completed={false}
+        index={0}
+        setTodoEntries={setTodoEntries}
+      />
+    );
 
-  fireEvent.click(getByTestId("todo-edit"));
-  fireEvent.keyDown(getByTestId("todo-editor"), { key: "Escape" });
-  expect(queryByTestId("todo-editor")).toBeNull();
-  expect(getByTestId("todo-text")).toBeTruthy();
-});
+    fireEvent.click(getByTestId("todo-edit"));
+    fireEvent.keyDown(getByTestId("todo-editor"), { key: "Escape" });
+    expect(queryByTestId("todo-editor")).toBeNull();
+    expect(getByTestId("todo-text")).toBeTruthy();
+  });
 
-it("should close editor on blur", () => {
-  const setTodoEntries = jest.fn();
-  const { queryByTestId, getByTestId } = render(
-    <TodoEntry
-      content={"test"}
-      completed={false}
-      index={0}
-      setTodoEntries={setTodoEntries}
-    />
-  );
+  it("should close editor on blur", () => {
+    const setTodoEntries = jest.fn();
+    const { queryByTestId, getByTestId } = render(
+      <TodoEntry
+        content={"test"}
+        completed={false}
+        index={0}
+        setTodoEntries={setTodoEntries}
+      />
+    );
 
-  fireEvent.click(getByTestId("todo-edit"));
-  fireEvent.blur(getByTestId("todo-editor"));
-  expect(queryByTestId("todo-editor")).toBeNull();
-  expect(getByTestId("todo-text")).toBeTruthy();
+    fireEvent.click(getByTestId("todo-edit"));
+    fireEvent.blur(getByTestId("todo-editor"));
+    expect(queryByTestId("todo-editor")).toBeNull();
+    expect(getByTestId("todo-text")).toBeTruthy();
+  });
 });
 
 describe("TodoList component", () => {
