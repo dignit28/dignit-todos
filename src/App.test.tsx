@@ -219,6 +219,27 @@ describe("TodoList component", () => {
     expect(todoList).toHaveTextContent("test2");
     expect(todoList.children).toHaveLength(2);
   });
+
+  it("should clear all completed entries on 'clear completed' button click", () => {
+    const { getByTestId } = render(
+      <TodoList
+        defaultTodoEntries={[
+          { completed: true, content: "test1" },
+          { completed: false, content: "test2" },
+          { completed: false, content: "test3" },
+          { completed: false, content: "test4" },
+          { completed: true, content: "test5" },
+        ]}
+      />
+    );
+    fireEvent.click(getByTestId("clear-completed-button"));
+
+    const todoList = getByTestId("todo-list");
+    expect(todoList.children).toHaveLength(3);
+    expect(todoList).toHaveTextContent("test2");
+    expect(todoList).toHaveTextContent("test3");
+    expect(todoList).toHaveTextContent("test4");
+  });
 });
 
 describe("TodoForm component", () => {

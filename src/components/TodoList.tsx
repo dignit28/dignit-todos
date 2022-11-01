@@ -79,6 +79,24 @@ const TodoList: React.FunctionComponent<TodoListProps> = (props) => {
     );
   });
 
+  // Deletes completed entries from todoEntries state
+  const clearCompleted = (): void => {
+    setTodoEntries((prevTodoEntries) => {
+      return [...prevTodoEntries].reduce(
+        (
+          uncompletedEntries: TodoEntryInterface[],
+          prevTodoEntry: TodoEntryInterface
+        ) => {
+          if (!prevTodoEntry.completed)
+            return uncompletedEntries.concat([prevTodoEntry]);
+          // else
+          return uncompletedEntries;
+        },
+        []
+      );
+    });
+  };
+
   return (
     <main>
       <TodoForm setTodoEntries={setTodoEntries} />
@@ -87,6 +105,9 @@ const TodoList: React.FunctionComponent<TodoListProps> = (props) => {
         {activeTodosAmount} items left
       </span>
       {buttonElements}
+      <button data-testid="clear-completed-button" onClick={clearCompleted}>
+        Clear completed
+      </button>
     </main>
   );
 };
