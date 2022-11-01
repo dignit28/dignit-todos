@@ -24,7 +24,6 @@ const TodoList: React.FunctionComponent<TodoListProps> = (props) => {
   );
 
   React.useEffect(() => {
-    console.log("hello");
     localStorage.setItem("dignitTodoSaveData", JSON.stringify(todoEntries));
   }, [todoEntries]);
 

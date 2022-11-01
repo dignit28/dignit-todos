@@ -1,10 +1,14 @@
 import React from "react";
 import TodoList from "./components/TodoList";
+import InspirationalQuote from "./components/InspirationalQuote";
 
 function App() {
   return (
-    <div className="App">
-      <TodoList test={false} defaultTodoEntries={[]} />
+    <div>
+      <div className="App">
+        <TodoList test={false} defaultTodoEntries={[]} />
+      </div>
+      <InspirationalQuote />
     </div>
   );
 }
