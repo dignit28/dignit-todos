@@ -11,6 +11,11 @@ interface TodoListProps {
   defaultTodoEntries: TodoEntryInterface[];
 }
 
+interface ButtonData {
+  value: string;
+  mode: ViewMode;
+}
+
 const TodoList: React.FunctionComponent<TodoListProps> = (props) => {
   const [todoEntries, setTodoEntries] = React.useState<TodoEntryInterface[]>(
     props.defaultTodoEntries
@@ -18,8 +23,19 @@ const TodoList: React.FunctionComponent<TodoListProps> = (props) => {
 
   const [viewMode, setViewMode] = React.useState<ViewMode>(ViewMode.ALL);
 
+  // Set view mode
+  const switchViewMode = (mode: ViewMode): void => {
+    setViewMode(mode);
+  };
+
   // Create list of todo entries from state
   const todoEntriesElements = todoEntries.map((todoEntry, index) => {
+    if (
+      (todoEntry.completed && viewMode === ViewMode.ACTIVE) ||
+      (!todoEntry.completed && viewMode === ViewMode.COMPLETED)
+    )
+      return;
+    // else
     return (
       <TodoEntry
         key={uuidv4()}
@@ -31,6 +47,7 @@ const TodoList: React.FunctionComponent<TodoListProps> = (props) => {
     );
   });
 
+  // Count uncompleted todos
   const activeTodosAmount: number = todoEntries.reduce(
     (totalActive: number, entry: TodoEntryInterface) => {
       return entry.completed ? totalActive : ++totalActive;
@@ -38,14 +55,38 @@ const TodoList: React.FunctionComponent<TodoListProps> = (props) => {
     0
   );
 
+  // Button data for button elements
+  const buttonData: ButtonData[] = [
+    { value: "All", mode: ViewMode.ALL },
+    { value: "Active", mode: ViewMode.ACTIVE },
+    { value: "Completed", mode: ViewMode.COMPLETED },
+  ];
+
+  // Create button elements from button data
+  const buttonElements = buttonData.map((data) => {
+    return (
+      <button
+        data-buttonValue={data.value}
+        data-testid={"view-mode-button-" + data.value}
+        className={
+          "todo-list__view-button" + (viewMode === data.mode && "_active")
+        }
+        disabled={viewMode === data.mode}
+        onClick={() => switchViewMode(data.mode)}
+      >
+        {data.value}
+      </button>
+    );
+  });
+
   return (
     <main>
       <TodoForm setTodoEntries={setTodoEntries} />
       <ul data-testid="todo-list">{todoEntriesElements}</ul>
-      <span data-testid="active-amount-text">{activeTodosAmount} items left</span>
-      <button>All</button>
-      <button>Active</button>
-      <button>Completed</button>
+      <span data-testid="active-amount-text">
+        {activeTodosAmount} items left
+      </span>
+      {buttonElements}
     </main>
   );
 };

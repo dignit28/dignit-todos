@@ -192,6 +192,33 @@ describe("TodoList component", () => {
     fireEvent.click(getByTestId("todo-checkbox"));
     expect(getByTestId("active-amount-text")).toHaveTextContent("0");
   });
+
+  it("should update view on view mode change", () => {
+    const { getByTestId } = render(
+      <TodoList
+        defaultTodoEntries={[
+          { completed: false, content: "test1" },
+          { completed: true, content: "test2" },
+        ]}
+      />
+    );
+
+    let todoList = getByTestId("todo-list");
+    fireEvent.click(getByTestId("view-mode-button-Active"));
+    expect(todoList.children).toHaveLength(1);
+    expect(todoList).toHaveTextContent("test1");
+
+    todoList = getByTestId("todo-list");
+    fireEvent.click(getByTestId("view-mode-button-Completed"));
+    expect(todoList.children).toHaveLength(1);
+    expect(todoList).toHaveTextContent("test2");
+
+    todoList = getByTestId("todo-list");
+    fireEvent.click(getByTestId("view-mode-button-All"));
+    expect(todoList).toHaveTextContent("test1");
+    expect(todoList).toHaveTextContent("test2");
+    expect(todoList.children).toHaveLength(2);
+  });
 });
 
 describe("TodoForm component", () => {
