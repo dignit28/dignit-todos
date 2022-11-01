@@ -1,9 +1,9 @@
 import React from "react";
 import { render, cleanup, screen, fireEvent } from "@testing-library/react";
 import "@testing-library/jest-dom/extend-expect";
-import TodoList from "./components/TodoList";
+import TodoList from "./components/TodoList/TodoList";
 import TodoEntry from "./components/TodoEntry/TodoEntry";
-import TodoForm from "./components/TodoForm";
+import TodoForm from "./components/TodoForm/TodoForm";
 import userEvent from "@testing-library/user-event";
 
 afterEach(cleanup);

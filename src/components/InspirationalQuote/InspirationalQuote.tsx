@@ -1,8 +1,10 @@
 import React from "react";
+// Styles
+import "./InspirationalQuote.css";
 // Functions
-import { fetchQuote } from "../quoteAPI";
+import { fetchQuote } from "../../quoteAPI";
 // Types
-import { QuoteStateInterface } from "../utility/interfaces";
+import { QuoteStateInterface } from "../../utility/interfaces";
 
 const InspirationalQuote: React.FunctionComponent = () => {
   const [loading, setLoading] = React.useState<Boolean>(false);

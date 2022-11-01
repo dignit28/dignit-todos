@@ -1,6 +1,9 @@
 import React from "react";
-import TodoList from "./components/TodoList";
-import InspirationalQuote from "./components/InspirationalQuote";
+// Styles
+import "./App.css";
+// Components
+import TodoList from "./components/TodoList/TodoList";
+import InspirationalQuote from "./components/InspirationalQuote/InspirationalQuote";
 
 function App() {
   return (

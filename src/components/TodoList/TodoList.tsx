@@ -1,11 +1,13 @@
 import React from "react";
 import { v4 as uuidv4 } from "uuid";
+// Styles
+import "./TodoList.css";
 // Components
-import TodoEntry from "./TodoEntry/TodoEntry";
-import TodoForm from "./TodoForm";
+import TodoEntry from "../TodoEntry/TodoEntry";
+import TodoForm from "../TodoForm/TodoForm";
 // Types
-import { TodoEntryInterface } from "../utility/interfaces";
-import { ViewMode } from "../utility/enums";
+import { TodoEntryInterface } from "../../utility/interfaces";
+import { ViewMode } from "../../utility/enums";
 
 interface TodoListProps {
   test: boolean;

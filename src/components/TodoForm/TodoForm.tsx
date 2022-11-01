@@ -1,6 +1,8 @@
 import React from "react";
+// Styles
+import "./TodoForm.css";
 // Types
-import { TodoEntryInterface } from "../utility/interfaces";
+import { TodoEntryInterface } from "../../utility/interfaces";
 interface TodoFormProps {
   setTodoEntries: React.Dispatch<React.SetStateAction<TodoEntryInterface[]>>;
 }
