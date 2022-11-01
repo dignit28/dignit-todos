@@ -35,14 +35,17 @@ const TodoList: React.FunctionComponent<TodoListProps> = (props) => {
   };
 
   // Create list of todo entries from state
-  const todoEntriesElements = todoEntries.map((todoEntry, index) => {
-    if (
-      (todoEntry.completed && viewMode === ViewMode.ACTIVE) ||
-      (!todoEntry.completed && viewMode === ViewMode.COMPLETED)
-    )
-      return;
-    // else
-    return (
+  const todoEntriesElements = todoEntries
+    .filter((todoEntry) => {
+      if (
+        (todoEntry.completed && viewMode === ViewMode.ACTIVE) ||
+        (!todoEntry.completed && viewMode === ViewMode.COMPLETED)
+      )
+        return false;
+      // else
+      return true;
+    })
+    .map((todoEntry, index) => (
       <TodoEntry
         key={uuidv4()}
         content={todoEntry.content}
@@ -50,8 +53,7 @@ const TodoList: React.FunctionComponent<TodoListProps> = (props) => {
         index={index}
         setTodoEntries={setTodoEntries}
       />
-    );
-  });
+    ));
 
   // Count uncompleted todos
   const activeTodosAmount: number = todoEntries.reduce(
