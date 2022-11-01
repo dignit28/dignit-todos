@@ -69,7 +69,7 @@ const TodoList: React.FunctionComponent<TodoListProps> = (props) => {
         data-buttonValue={data.value}
         data-testid={"view-mode-button-" + data.value}
         className={
-          "todo-list__view-button" + (viewMode === data.mode && "_active")
+          "todo-list__view-button" + (viewMode === data.mode ? "_active" : "")
         }
         disabled={viewMode === data.mode}
         onClick={() => switchViewMode(data.mode)}
